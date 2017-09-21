@@ -1,0 +1,16 @@
+{% import 'admin/layout.html' as layout with context -%}
+{% extends 'admin/base.html' %}
+
+{% block head_tail %}
+{{ super() }}
+
+<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+<link href="{{ url_for('static', filename='css/admin.css') }}" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jsoneditor.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+

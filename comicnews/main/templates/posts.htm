@@ -1,0 +1,62 @@
+{% extends 'layout.htm' %}
+{% block container %}
+  <div class="top-pad">
+{% for data in posts %}
+        <hr/>
+        <table class="table table-striped">
+            <tr>
+              <td>{{ _('id') }}</td>
+              <td>{{data.id}}</td>
+            </tr>
+            <tr>
+              <td>{{ _('created') }}</td>
+              <td>{{data.created}}</td>
+            </tr>
+
+
+            <tr>
+              <td>{{ _('url') }}</td>
+              <td><a href="{{data.url }}">Link</a></td>
+            </tr>
+
+            <tr>
+              <td>{{ _('title') }}</td>
+               <td>{{data.title | upper}}</td>
+            </tr>
+
+            <tr>
+              <td>{{ _('published') }}</td>
+               <td>{{data.published}}</td>
+            </tr>
+
+
+            <tr>
+              <td>{{ _('tags') }}</td>
+               <td>{{data.tags}}</td>
+            </tr>
+
+            <tr>
+              <td>{{ _('images') }}</td>
+              <td>
+                <div class="d-flex flex-nowrap">
+                    {% for image in data.images %}
+                    <img src="{{image}}"
+                         alt="{{title}}"
+                         class="img-thumbnail"
+                         width="200"
+                    />
+                    {% endfor %}
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>{{ _('text') }}</td>
+               <td>{{data.text}}</td>
+            </tr>
+
+            </tr>
+        </table>
+    {% endfor %}
+  </div>
+{% endblock %}

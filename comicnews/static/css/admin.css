@@ -1,0 +1,29 @@
+.form-horizontal .form-group {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.col-json {
+   overflow-x: scroll;
+}
+.json-raw-text {
+   display: none;
+}
+
+.pre-json {
+    color: green;
+    background-color: white;
+    font-size: 0.8em;
+    overflow-x: scroll;
+    word-wrap: break-word;
+    max-width: 60rem;
+}
+
+textarea#json {
+  height: 40rem;
+  color: green;
+  font-size: 0.8em;
+}
+input[name='root[text]'] {
+  height: 10rem;
+}
