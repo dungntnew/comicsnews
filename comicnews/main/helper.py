@@ -1,4 +1,4 @@
-from flask import current_app
+from comicnews.data.schemas import validate_post
 
 """
 convert raw json object to valid form
@@ -16,24 +16,19 @@ add flag where post is valid
 FIELDS = ('url', 'title', 'published', 'images', 'tags', 'text')
 
 
-def raw_to_post(object):
+def raw_to_post(data):
+    raw = data.to_json()
 
-    current_app.logger.info("parsing: {}".format(object.id))
+    valid, _ = validate_post(raw)
 
-    raw = object.to_json()
-
-    current_app.logger.info("raw: {}".format(raw))
-
-    for key in FIELDS:
-        if key not in raw:
-            return {
-                'valid': False
-            }
+    if not valid:
+        return {
+            'valid': False
+        }
 
     raw.update({
         'valid': True,
-        'id': object.id,
-        'created': object.created_date
+        'id': data.id,
+        'created': data.created_date
     })
-    current_app.logger.info(raw)
     return raw
