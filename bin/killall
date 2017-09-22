@@ -1,0 +1,1 @@
+killall -s INT /var/opt/comic/dev/env/bin/uwsgi

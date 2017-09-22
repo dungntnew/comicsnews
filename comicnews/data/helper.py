@@ -32,3 +32,11 @@ def raw_to_post(data):
         'created': data.created_date
     })
     return raw
+
+
+def post_to_raw(data):
+    del data['id']
+    del data['created']
+    del data['valid']
+
+    return data

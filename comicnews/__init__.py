@@ -9,6 +9,8 @@ from comicnews.cache import cache
 from comicnews.config import configure_app
 from comicnews.data.models import db
 
+from comicnews.apis import blueprint as api
+
 app = Flask(__name__,
             instance_path=get_instance_folder_path(),
             instance_relative_config=True,
@@ -79,8 +81,8 @@ def internal_server_error(error):
 #     }
 #     app.logger.error('Unhandled Exception: %s', (error))
 #     return jsonify(response), 500
-    # app.logger.error('Unhandled Exception: %s', (error))
-    # return render_template('500.htm'), 500
+# app.logger.error('Unhandled Exception: %s', (error))
+# return render_template('500.htm'), 500
 
 
 @app.context_processor
@@ -98,6 +100,7 @@ def home(lang_code=None):
 
 app.register_blueprint(main, url_prefix='/main')
 app.register_blueprint(main, url_prefix='/<lang_code>/main')
-app.register_blueprint(mod_api, url_prefix='/api')
-app.register_blueprint(mod_api, url_prefix='/<lang_code>/api')
+# app.register_blueprint(mod_api, url_prefix='/api')
+# app.register_blueprint(mod_api, url_prefix='/<lang_code>/api')
+app.register_blueprint(api, url_prefix='/api')
 create_admin(app=app, db=db, url_prefix='/<lang_code>/admin')

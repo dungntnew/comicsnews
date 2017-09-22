@@ -6,7 +6,10 @@ post_schema = {
     'properties': {
         'url': {'type': 'string'},
         'title': {'type': 'string'},
-        'published': {'type': 'string'},
+        'published': {
+            'type': 'string',
+            'format': 'date-time'
+        },
         'images': {
             'type': 'array',
             'items': {'type': 'string'}

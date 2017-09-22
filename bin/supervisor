@@ -1,0 +1,2 @@
+source /var/opt/comic/dev/env/bin/activate
+supervisord -c /var/opt/comic/dev/etc/supervisord.conf

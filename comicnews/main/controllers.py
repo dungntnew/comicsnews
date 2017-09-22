@@ -1,7 +1,7 @@
 from flask import Blueprint, current_app, render_template
-from comicnews.cache import cache
 
-from comicnews.main.query import latest_raw_objects
+from comicnews.cache import cache
+from comicnews.data.query_helper import latest_raw_objects
 
 main = Blueprint('main', __name__, template_folder='templates')
 
