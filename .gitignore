@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+temp/lib.py/
 lib64/
 parts/
 sdist/
@@ -61,3 +61,9 @@ comicnews/instance/*.cfg
 
 # ignore sqlitedb
 comicnews/*.db
+
+# ignore vagrant
+.vagrant/
+
+# ignore .idea
+.idea/

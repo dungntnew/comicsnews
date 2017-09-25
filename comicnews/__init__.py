@@ -3,7 +3,6 @@ from flask_babel import Babel
 from flask_security import current_user
 from comicnews.utils import get_instance_folder_path
 from comicnews.main.controllers import main
-from comicnews.api import mod_api
 from comicnews.admin import create_admin
 from comicnews.cache import cache
 from comicnews.config import configure_app
