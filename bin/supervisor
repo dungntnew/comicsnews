@@ -1,2 +1,3 @@
-source /var/opt/comic/dev/env/bin/activate
+source activate manga
+#/var/opt/comic/dev/env/bin/activate
 supervisord -c /var/opt/comic/dev/etc/supervisord.conf
