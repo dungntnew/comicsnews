@@ -91,15 +91,11 @@ def inject_data():
 
 
 @app.route('/')
-@app.route('/<lang_code>/')
-@cache.cached(0)
+#@cache.cached(0)
 def home(lang_code=None):
     return render_template('index.htm')
 
 
 app.register_blueprint(main, url_prefix='/main')
-app.register_blueprint(main, url_prefix='/<lang_code>/main')
-# app.register_blueprint(mod_api, url_prefix='/api')
-# app.register_blueprint(mod_api, url_prefix='/<lang_code>/api')
 app.register_blueprint(api, url_prefix='/api')
-create_admin(app=app, db=db, url_prefix='/<lang_code>/admin')
+create_admin(app=app, db=db, url_prefix='/admin')

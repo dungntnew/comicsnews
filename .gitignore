@@ -67,3 +67,4 @@ comicnews/*.db
 
 # ignore .idea
 .idea/
+uwsgi.pid
