@@ -34,6 +34,7 @@ class Post(Base):
 
 
 class RawObject(db.Model):
+    __tablename__ = "raw_objects"
     id = db.Column(db.Integer(), primary_key=True)
     json = db.Column(db.UnicodeText)
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())

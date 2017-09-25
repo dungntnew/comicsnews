@@ -61,6 +61,8 @@ comicnews/instance/*.cfg
 
 # ignore sqlitedb
 comicnews/*.db
+# ignore mysql db
+*.sql
 
 # ignore vagrant
 .vagrant/
@@ -68,3 +70,5 @@ comicnews/*.db
 # ignore .idea
 .idea/
 uwsgi.pid
+
+

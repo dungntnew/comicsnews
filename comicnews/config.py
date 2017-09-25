@@ -45,15 +45,13 @@ class BaseConfig(object):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///comicnews.db'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:abcd1234@localhost/comic?charset=utf8'
     SECRET_KEY = 'a9eec0e0-23b7-4788-9a92-318347b9a39f'
 
 
 class ProductionConfig(BaseConfig):
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'mysql://manga:manga@evuedev.cigku9rtjcia.us-west-2.rds.amazonaws.com/manga?charset=utf8'
-    SECRET_KEY = 'a9eec0e0-23b7-4788-9a92-318347b9a39f'
 
 
 class TestingConfig(BaseConfig):
@@ -73,8 +71,14 @@ config = {
 
 def configure_app(app):
     config_name = os.getenv('FLASK_CONFIGURATION', 'default')
+    print("config_name: {}".format(config_name))
+
     app.config.from_object(config[config_name])
     app.config.from_pyfile('config.cfg', silent=True)
+
+    # print:
+    print("CONFIG: {}".format(app.config))
+
     # Configure logging
     handler = logging.FileHandler(app.config['LOGGING_LOCATION'])
     handler.setLevel(app.config['LOGGING_LEVEL'])
