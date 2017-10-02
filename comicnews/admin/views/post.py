@@ -70,3 +70,4 @@ class RawObjectView(Base):
     form_overrides = {
         'json': JSONTextAreaField
     }
+    column_filters = ('published_date', 'provider')

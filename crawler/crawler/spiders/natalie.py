@@ -30,11 +30,15 @@ class NatalieSpider(scrapy.Spider):
 
     def parse_item(self, response):
 
+        published_date =response.css(
+                '.NA_articleUnit .NA_articleHeader .NA_attr .NA_date time::text').extract_first()
+        published_date = datetime.strptime(published_date, '%Y年%m月%d日 %H:%M')
+
         item = {
             'url': response.url,
+            'provider': 'natalie',
             'title': response.css('.NA_articleUnit .NA_articleHeader h1::text').extract_first(),
-            'published': response.css(
-                '.NA_articleUnit .NA_articleHeader .NA_attr .NA_date time::text').extract_first(),
+            'published_date': published_date,
             'text': ''.join(
                 response.css('.NA_articleBody').xpath('.//text()').extract()).strip(),
             'tags': response.css('.NA_articleFooter .NA_relatedTag .NA_links a').xpath(

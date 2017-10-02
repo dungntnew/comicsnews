@@ -10,10 +10,18 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import NullPool
 
 import json
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
 DeclarativeBase = declarative_base()
+
+
+class DateTimeSupportJSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, datetime):
+            return o.isoformat()
+        return super(DateTimeSupportJSONEncoder, self).default(o)
 
 
 class RawObject(DeclarativeBase):
@@ -21,7 +29,9 @@ class RawObject(DeclarativeBase):
 
     id = Column(Integer, primary_key=True)
     url = Column(UnicodeText)
+    provider = Column(String(255))
     json = Column(UnicodeText)
+    published_date = Column(DateTime, default=None)
     created_date = Column(DateTime, default=func.current_timestamp())
     modified_date = Column(DateTime, default=func.current_timestamp(),
                            onupdate=func.current_timestamp())
@@ -49,8 +59,12 @@ class CrawlerPipeline(object):
         self.session.close()
 
     def process_item(self, item, spider):
-        print("ITEM: ==========> {}".format(item))
-        raw_object = RawObject(url=item['url'], json=json.dumps(item))
+        #print("ITEM: ==========> {}".format(item))
+        raw_object = RawObject(
+            url=item['url'],
+            provider=item['provider'],
+            published_date=item['published_date'],
+            json=json.dumps(item, cls=DateTimeSupportJSONEncoder))
         link_exists = self.session.query(RawObject).filter_by(url=item['url']).first() is not None
 
         if link_exists:

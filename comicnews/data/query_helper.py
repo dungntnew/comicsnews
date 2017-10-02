@@ -4,7 +4,7 @@ from comicnews.data.models import db, RawObject
 
 
 def latest_raw_objects():
-    posts = [raw_to_post(raw) for raw in RawObject.query.order_by(RawObject.created_date.asc()).limit(50).all()]
+    posts = [raw_to_post(raw) for raw in RawObject.query.order_by(RawObject.published_date.desc()).limit(100).all()]
     posts = [post for post in posts if post and post['valid']]
 
     return posts
