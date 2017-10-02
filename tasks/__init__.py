@@ -17,7 +17,7 @@ def update_date(ctx):
                 o.provider = 'natalie'
                 o.published_date = datetime.strptime(raw['published'], '%Y-%m-%d %H:%M:%S')
                 c += 1
-                db.session.commit()
+                #db.session.commit()
                 print('update: {}'.format(c))
 
             except Exception as e:
@@ -25,9 +25,13 @@ def update_date(ctx):
                     o.provider = 'natalie'
                     o.published_date = datetime.strptime(raw['published'], '%Y年%m月%d日 %H:%M')
                     c += 1
-                    db.session.commit()
+                    #db.session.commit()
                     print('update: {}'.format(c))
                 except Exception as e:
                     print("EEEE: {} - {}".format(raw['published'], e))
-
-        print("done: {}".format(c))
+        try:
+          print("done: {}".format(c))
+          db.session.commit()
+        except Exception as e:
+          print('E: {}'.format(e))
+        
