@@ -37,6 +37,9 @@ class RawObject(db.Model):
     __tablename__ = "raw_objects"
     id = db.Column(db.Integer(), primary_key=True)
     json = db.Column(db.UnicodeText)
+    provider = db.Column(db.String(255), default=None)
+    validated_at = db.Column(db.DateTime, default=None)
+    published_date = db.Column(db.DateTime, default=None)
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     modified_date = db.Column(db.DateTime, default=db.func.current_timestamp(),
                               onupdate=db.func.current_timestamp())

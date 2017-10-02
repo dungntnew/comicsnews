@@ -1,7 +1,7 @@
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:abcd1234@localhost/comic?charset=utf8'
+SQLALCHEMY_DATABASE_URI = ''
 
 
 def db_connect():

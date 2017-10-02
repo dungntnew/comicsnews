@@ -1,22 +1,33 @@
 from invoke import task
 
-from tasks.helpers import db_connect
-
 
 @task(name='update_date')
 def update_date(ctx):
     import json
     from datetime import datetime
 
-    from comicnews.data.models import RawObject
-    _, session = db_connect()
-    for o in session.query(RawObject).all():
-        raw = json.loads(o.json)
-        try:
-            old_date = datetime.strptime(raw['published'], '%Y年%m月%d日 %H:%M')
-            raw['published'] = old_date.strftime('%Y-%m-%d %H:%M:%S')
-            o.json = json.dumps(raw)
-        except Exception:
-            print("EEEE: {}".format(raw['published']))
+    from comicnews import app
+    from comicnews.data.models import db, RawObject
 
-    session.commit()
+    with app.app_context():
+        c = 0
+        for o in db.session.query(RawObject).all():
+            raw = json.loads(o.json)
+            try:
+                o.provider = 'natalie'
+                o.published_date = datetime.strptime(raw['published'], '%Y-%m-%d %H:%M:%S')
+                c += 1
+                db.session.commit()
+                print('update: {}'.format(c))
+
+            except Exception as e:
+                try:
+                    o.provider = 'natalie'
+                    o.published_date = datetime.strptime(raw['published'], '%Y年%m月%d日 %H:%M')
+                    c += 1
+                    db.session.commit()
+                    print('update: {}'.format(c))
+                except Exception as e:
+                    print("EEEE: {} - {}".format(raw['published'], e))
+
+        print("done: {}".format(c))

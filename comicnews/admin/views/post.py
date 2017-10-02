@@ -50,13 +50,17 @@ class RawObjectView(Base):
     can_edit = True
 
     column_list = ('id',
+                   'provider',
                    'json',
+                   'published_date',
                    'created_date',
                    'modified_date'
                    )
     column_labels = {
         'id': '#',
+        'provider': 'provider',
         'json': u'データー',
+        'published_date': '公開日',
         'created_date': u'作成時期',
         'modified_date': u'更新時期',
     }
